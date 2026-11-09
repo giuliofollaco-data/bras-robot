@@ -295,7 +295,7 @@ wheels = [
 [[package]]
 name = "virtual-robot-arm"
 version = "0.1.0"
-source = { editable = "." }
+source = { virtual = "." }
 dependencies = [
     { name = "gymnasium" },
     { name = "mujoco" },

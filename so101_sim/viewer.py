@@ -8,7 +8,7 @@ import mujoco.viewer
 MJPYTHON_HELP = (
     "Sur macOS, la fenêtre 3D de MuJoCo exige de lancer le script avec "
     "`mjpython` au lieu de `python`, par exemple :\n"
-    "    uv run mjpython scripts/view.py"
+    "    uv run mjpython -m scripts.view"
 )
 
 

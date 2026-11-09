@@ -1,6 +1,6 @@
 """Étape 1 — cinématique directe observée.
 
-Lancement :  uv run python scripts/demo_joints.py
+Lancement :  uv run python -m scripts.demo_joints
 
 Pour une série de configurations du bras (angles des 5 articulations), on
 envoie les consignes, on laisse le bras se stabiliser, puis on mesure où se

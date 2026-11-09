@@ -1,6 +1,6 @@
 """Étape 1 — piloter le bras à la main.
 
-Lancement (macOS) :  uv run mjpython scripts/view.py
+Lancement (macOS) :  uv run mjpython -m scripts.view
 
 Dans la fenêtre : panneau de droite, section « Control », un curseur par
 moteur. Bougez-les et regardez la position du bout de la pince, affichée en

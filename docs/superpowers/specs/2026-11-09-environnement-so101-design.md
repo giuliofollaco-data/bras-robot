@@ -98,16 +98,23 @@ l'extrémité de la pince pour mesurer sa position.
 ```
 assets/so101/          modèle officiel copié (+ README source/licence)
 assets/scene.xml       scène : table, cible, éclairage
-src/so101_sim/
+so101_sim/
   robot.py             accès bas niveau : état, consignes, pas de simulation
   reach_env.py         environnement Gymnasium « atteindre la cible »
-src/kinematics/        étape 2 — vide, réservé à l'utilisateur
-src/rl/                étape 3 — vide, réservé à l'utilisateur
+  viewer.py            ouverture de la fenêtre 3D (message mjpython)
+kinematics/            étape 2 — vide, réservé à l'utilisateur
+rl/                    étape 3 — vide, réservé à l'utilisateur
 scripts/
   view.py              ouvrir la scène dans le visualiseur
   demo_joints.py       étape 1 : bouger les articulations, afficher la pince
 tests/                 tests de base de l'environnement
 ```
+
+Modification pendant la construction : les paquets sont à la racine (pas de
+`src/`) et le projet n'est pas installé ; on lance tout depuis la racine avec
+`python -m scripts.xxx`. Raison : sur cette machine, macOS marque comme cachés
+les fichiers de `.venv`, et Python ignore alors le fichier `.pth` de
+l'installation éditable — le paquet devenait introuvable.
 
 Deux couches séparées : `robot.py` (le bras, réutilisable par la cinématique
 inverse sans notion de récompense) et `reach_env.py` (la tâche pour

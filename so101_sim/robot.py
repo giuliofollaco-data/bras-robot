@@ -15,7 +15,7 @@ from pathlib import Path
 import mujoco
 import numpy as np
 
-DEFAULT_SCENE = Path(__file__).resolve().parents[2] / "assets" / "scene.xml"
+DEFAULT_SCENE = Path(__file__).resolve().parents[1] / "assets" / "scene.xml"
 
 # Les 5 articulations du bras, de la base vers la pince.
 ARM_JOINTS = ["shoulder_pan", "shoulder_lift", "elbow_flex", "wrist_flex", "wrist_roll"]
