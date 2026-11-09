@@ -115,13 +115,20 @@ l'apprentissage par renforcement).
 
 ### Environnement « atteindre la cible »
 
-- **Action** : variation des consignes de position des 5 articulations du bras
-  (pince ignorée pour cette tâche), bornée, normalisée dans [-1, 1].
+- **Action** : variation des consignes de position des 5 articulations du bras,
+  bornée, normalisée dans [-1, 1]. La pince est hors de l'espace d'action pour
+  cette tâche seulement (inutile pour atteindre un point, et chaque dimension
+  d'action en plus ralentit l'apprentissage) ; elle reste entièrement modélisée
+  et pilotable via `robot.py` (ouvrir/fermer), et la tâche de l'étape 4 l'ajoutera
+  à l'action.
 - **Observation** : angles et vitesses des 5 articulations, position de la
   pince, position de la cible.
-- **Récompense** : moins la distance pince–cible, plus un bonus quand la
-  distance passe sous un seuil (ex. 2 cm). Volontairement simple et commentée,
-  pour que l'utilisateur puisse l'expérimenter.
+- **Récompense** : convention Gymnasium, `step` renvoie une récompense, donc
+  l'environnement en a une dès le départ. Elle est isolée dans une seule petite
+  fonction `compute_reward(...)`, version de base volontairement naïve (moins la
+  distance pince–cible, plus un bonus sous un seuil, ex. 2 cm), commentée comme
+  « à repenser à l'étape 3 » : concevoir la récompense fait partie des
+  exercices d'apprentissage par renforcement de l'utilisateur.
 - **Épisode** : se termine en succès sous le seuil, ou après un nombre maximal
   de pas.
 - **Réinitialisation** : bras en position de repos, cible tirée aléatoirement
