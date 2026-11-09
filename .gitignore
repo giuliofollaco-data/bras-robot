@@ -14,3 +14,6 @@ checkpoints/
 .DS_Store
 .vscode/
 .idea/
+
+# Livres de référence (sous droits d'auteur, non publiés)
+bibliographie/
