@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+
+# Résultats d'entraînement
+runs/
+checkpoints/
+*.mp4
+
+# macOS / éditeurs
+.DS_Store
+.vscode/
+.idea/
