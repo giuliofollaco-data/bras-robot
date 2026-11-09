@@ -1,0 +1,55 @@
+<!--
+  Scène de travail : le SO-101 posé sur une table, et une cible à atteindre.
+  Le bras est inclus sans modification depuis so101/so101_new_calib.xml.
+  Repère : x vers l'avant du bras, y vers sa gauche, z vers le haut.
+  Le dessus de la table est à z = 0, là où est fixée la base du bras.
+-->
+<mujoco model="so101_scene">
+  <include file="so101/so101_new_calib.xml"/>
+  <!-- Le modèle inclus cherche ses maillages dans « assets », mais le chemin
+       est résolu depuis ce fichier-ci : on le corrige ici. -->
+  <compiler meshdir="so101/assets"/>
+
+  <!-- Pas de temps physique : 2 ms (500 Hz). -->
+  <option timestep="0.002"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0"/>
+    <global azimuth="150" elevation="-25" offwidth="1280" offheight="720"/>
+  </visual>
+
+  <statistic center="0.15 0 0.1" extent="0.6"/>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4"
+             rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+    <material name="table" rgba="0.55 0.4 0.3 1"/>
+  </asset>
+
+  <worldbody>
+    <light pos="0 0 3" dir="0 0 -1" directional="true"/>
+    <geom name="floor" type="plane" size="0 0 0.05" pos="0 0 -0.75" material="groundplane"/>
+
+    <!-- Table : plateau de 80 x 120 cm, dessus à z = 0. -->
+    <geom name="table" type="box" size="0.4 0.6 0.02" pos="0.25 0 -0.02" material="table"/>
+
+    <!--
+      Cible : un corps « mocap », que l'on place directement par le code
+      (data.mocap_pos) sans que la physique ne l'influence.
+      contype/conaffinity = 0 : purement visuelle, rien ne peut la heurter.
+    -->
+    <body name="target" mocap="true" pos="0.25 0 0.15">
+      <geom name="target" type="sphere" size="0.015" rgba="1 0.2 0.2 0.7" contype="0" conaffinity="0"/>
+    </body>
+  </worldbody>
+
+  <!--
+    Position de repos : bras replié, pince fermée.
+    Ordre : shoulder_pan, shoulder_lift, elbow_flex, wrist_flex, wrist_roll, gripper.
+  -->
+  <keyframe>
+    <key name="home" qpos="0 -1.57 1.57 0.8 0 0" ctrl="0 -1.57 1.57 0.8 0 0"/>
+  </keyframe>
+</mujoco>
